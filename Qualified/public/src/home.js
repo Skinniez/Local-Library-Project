@@ -14,7 +14,27 @@ function getBooksBorrowedCount(books) {
     return borrowCount;
   }, 0);
 }
-function getMostCommonGenres(books) {} //for each / if
+function getMostCommonGenres(books) {
+// {genre:" science", count:0}
+// loop through books list and create an array of objects for each genre
+// loop through the books array and count the number of times each genre occurs
+// add a key for count to the genres array and +1 for each occurence
+let genreCount = {}
+books.forEach((book) => {
+  let currentGenre = book.genre
+  if (currentGenre in genreCount){
+    genreCount[currentGenre] += 1
+  }else{
+    genreCount[currentGenre] = 1
+  }
+  return genreCount
+})
+let popularGenre = [{genreCount}]
+return sliceSort(popularGenre)
+console.log(popularGenre)
+console.log("********************************")
+
+} //for each / if
 
 function getMostPopularBooks(books) {
   const borrows = books.map((book) => ({
