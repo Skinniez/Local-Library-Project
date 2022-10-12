@@ -29,25 +29,7 @@ function getBorrowersForBook(book, accounts) {
    })
    .slice(0, 10);
  }
-// function getBorrowersForBook(book, accounts) {
-//   const borrowers = []
-//   for (let status in book){
-//     const borrowId = book.status.id
-//     const matched = findId(accounts, borrowId)
-//     borrowers.push({...book, ...matched})
-//   }
-//   return borrowers.slice(0, 10)
-//   console.log("********************************")
-//   console.log(borrowers)
-//   console.log("********************************")
-// }
 
-
-
-//   // helper function to clean up the partition books function
-//   const filteredBooks = books.filter((books, delta)=>{
-//     return books.filter(({borrows})=> delta === borrows[0].returned)
-// }
 
 
 module.exports = {

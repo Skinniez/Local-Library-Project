@@ -14,27 +14,30 @@ function getBooksBorrowedCount(books) {
     return borrowCount;
   }, 0);
 }
-function getMostCommonGenres(books) {
+
 // {genre:" science", count:0}
 // loop through books list and create an array of objects for each genre
 // loop through the books array and count the number of times each genre occurs
 // add a key for count to the genres array and +1 for each occurence
-let genreCount = {}
-books.forEach((book) => {
-  let currentGenre = book.genre
-  if (currentGenre in genreCount){
-    genreCount[currentGenre] += 1
-  }else{
-    genreCount[currentGenre] = 1
+function getMostCommonGenres(books) { 
+  let countObj = {};
+  books.forEach(aBook => {
+    if (countObj[aBook.genre] != null) {
+      countObj[aBook.genre]++;
+    } else {
+      countObj[aBook.genre] = 1;
+    }
+  });
+  let countArray = [];
+  for (const [key, value] of Object.entries(countObj)) {
+    countArray.push({
+      'name' : key,
+      'count' : value
+    }); 
   }
-  return genreCount
-})
-let popularGenre = [{genreCount}]
-return sliceSort(popularGenre)
-console.log(popularGenre)
-console.log("********************************")
+return sliceSort(countArray)
+}
 
-} //for each / if
 
 function getMostPopularBooks(books) {
   const borrows = books.map((book) => ({
@@ -82,6 +85,12 @@ function sliceSort(arr, slicer = 5) {
 function findId(element, id) {
   return element.find((element) => element.id === id);
 }
+function filterBooks(books,account){
+  return books.filter((bookObj) =>{
+    let current = bookObj.borrows[0]
+    return !current.return && current.id === account.id
+  })
+}
 
 module.exports = {
   getTotalBooksCount,
@@ -93,4 +102,5 @@ module.exports = {
   findId,
   sliceSort,
   arrayCount,
+  filterBooks,
 };
